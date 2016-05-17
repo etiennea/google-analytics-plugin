@@ -13,8 +13,12 @@ UniversalAnalyticsPlugin.prototype.debugMode = function(success, error) {
   cordova.exec(success, error, 'UniversalAnalytics', 'debugMode', []);
 };
 
-UniversalAnalyticsPlugin.prototype.trackView = function(screen, success, error) {
-  cordova.exec(success, error, 'UniversalAnalytics', 'trackView', [screen]);
+/**
+ * deepLinkUrl is used to parse campaign parameters. eg:
+ *     http://my-scheme/content/123?utm_source=google
+ */
+UniversalAnalyticsPlugin.prototype.trackView = function(screen, deepLinkUrl, success, error) {
+  cordova.exec(success, error, 'UniversalAnalytics', 'trackView', [screen, deepLinkUrl]);
 };
 
 UniversalAnalyticsPlugin.prototype.addCustomDimension = function(key, value, success, error) {
@@ -66,6 +70,10 @@ UniversalAnalyticsPlugin.prototype.addTransactionItem = function(transactionId, 
 /* automatic uncaught exception tracking */
 UniversalAnalyticsPlugin.prototype.enableUncaughtExceptionReporting = function (enable, success, error) {
   cordova.exec(success, error, 'UniversalAnalytics', 'enableUncaughtExceptionReporting', [enable]);
+}
+
+UniversalAnalyticsPlugin.prototype.allowIDFACollection = function (success) {
+  cordova.exec(success, function () {}, "UniversalAnalytics", "allowIDFACollection",  []);
 };
 
 module.exports = new UniversalAnalyticsPlugin();

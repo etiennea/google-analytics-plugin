@@ -24,6 +24,7 @@
     <header-file src="ios/UniversalAnalyticsPlugin.h" />
     <source-file src="ios/UniversalAnalyticsPlugin.m" />
     <source-file src="ios/libGoogleAnalyticsServices.a" framework="true" />
+    <source-file src="ios/libAdIdAccess.a" framework="true" />
     <header-file src="ios/GAIDictionaryBuilder.h" />
     <header-file src="ios/GAIFields.h" />
     <header-file src="ios/GAILogger.h" />
@@ -38,13 +39,13 @@
 
     <framework src="SystemConfiguration.framework" />
     <framework src="CoreData.framework" />
+    <framework src="AdSupport.framework" />
     <framework src="libz.dylib" />
     <framework src="libsqlite3.dylib" />
   </platform>
 
   <platform name="android">
     <framework src="com.google.android.gms:play-services-analytics:+" />
-
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="UniversalAnalytics">
         <param name="android-package" value="com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin" />
@@ -53,6 +54,15 @@
     <config-file target="AndroidManifest.xml" parent="/*">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+      <!-- Google Play Store Campaign Measurement -->
+      <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
+      <receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+                android:exported="true">
+        <intent-filter>
+          <action android:name="com.android.vending.INSTALL_REFERRER" />
+        </intent-filter>
+      </receiver>
     </config-file>
     <!-- Add support for devices without Google Play Services installed. -->
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
