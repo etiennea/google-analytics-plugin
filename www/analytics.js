@@ -106,6 +106,7 @@ UniversalAnalyticsPlugin.prototype.enableUncaughtExceptionReporting = function (
   cordova.exec(success, error, 'UniversalAnalytics', 'enableUncaughtExceptionReporting', [enable]);
 };
 
+/* custom function for setting campagne data */
 UniversalAnalyticsPlugin.prototype.setCampaignData = function(campaignData, success) {
   cordova.exec(success, function () {}, "UniversalAnalytics", "setCampaignData", [campaignData]);
 };
