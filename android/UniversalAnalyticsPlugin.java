@@ -191,7 +191,7 @@ public class UniversalAnalyticsPlugin extends CordovaPlugin {
         callbackContext.success("Saved campaign data");
     }
 
-    private void startTracker(String id, CallbackContext callbackContext) {
+    private void startTracker(String id, int dispatchPeriod, CallbackContext callbackContext) {
         if (null != id && id.length() > 0) {
             tracker = GoogleAnalytics.getInstance(this.cordova.getActivity()).newTracker(id);
             callbackContext.success("tracker started");
